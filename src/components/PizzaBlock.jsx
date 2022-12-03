@@ -1,17 +1,31 @@
-function PizzaBlock({ title, price, imageUrl, sizes }) {
+import React from 'react';
+function PizzaBlock({ title, price, imageUrl, sizes, types }) {
+  const typeNames = ['thin', 'traditional'];
+  const [activeType, setActiveType] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">thin</li>
-          <li>traditional</li>
+          {types.map((typeId, i) => (
+            <li
+              key={i}
+              onClick={() => setActiveType(typeId)}
+              className={activeType === typeId ? 'active' : ''}>
+              {typeNames[typeId]}
+            </li>
+          ))}
         </ul>
         <ul>
-          {/* <li className="active">26 cm.</li> */}
-          {sizes.map((size) => (
-            <li>{size} cm.</li>
+          {sizes.map((size, i) => (
+            <li
+              key={i}
+              onClick={() => setActiveSize(i)}
+              className={activeSize === i ? 'active' : ''}>
+              {size} cm.
+            </li>
           ))}
         </ul>
       </div>

@@ -26,6 +26,7 @@ function App() {
                 price={obj.price}
                 imageUrl={obj.imageUrl}
                 sizes={obj.sizes}
+                types={obj.types}
               />
             ))}
           </div>

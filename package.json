@@ -18,6 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy" : "https://vadimsobinin-pizza-react-db.vercel.app",
   "eslintConfig": {
     "extends": [
       "react-app",

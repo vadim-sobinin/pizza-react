@@ -4,9 +4,16 @@ import Header from './components/Header';
 import PizzaBlock from './components/PizzaBlock';
 import Sort from './components/Sort';
 import './scss/app.scss';
-import pizzas from './assets/pizza.json';
 
 function App() {
+  const [items, setItems] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('https://vadimsobinin-pizza-react-db.vercel.app/pizzas')
+      .then((res) => res.json())
+      .then((data) => setItems(data));
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
@@ -18,7 +25,7 @@ function App() {
           </div>
           <h2 className="content__title">All pizzas</h2>
           <div className="content__items">
-            {pizzas.map((obj) => (
+            {items.map((obj) => (
               <PizzaBlock
                 key={obj.id}
                 title={obj.title}

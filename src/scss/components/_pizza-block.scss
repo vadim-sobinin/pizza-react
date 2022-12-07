@@ -5,10 +5,6 @@
   text-align: center;
   margin-bottom: 65px;
 
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
-  }
-
   &__image {
     width: 260px;
   }
@@ -72,5 +68,9 @@
     font-size: 22px;
     line-height: 27px;
     letter-spacing: 0.015em;
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: center;
   }
 }

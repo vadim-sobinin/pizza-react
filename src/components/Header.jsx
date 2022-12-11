@@ -2,10 +2,14 @@ import logoSvg from '../assets/img/pizza-logo.svg';
 import { Link } from 'react-router-dom';
 
 function Header() {
+  const scroll = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="header">
       <div className="container">
-        <Link to="/">
+        <Link onClick={scroll} to="/">
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
@@ -14,8 +18,8 @@ function Header() {
             </div>
           </div>
         </Link>
-        <div className="header__cart">
-          <Link to="/cart" className="button button--cart">
+        <div onClick={window.scrollTo(0, 0)} className="header__cart">
+          <Link onClick={scroll} to="/cart" className="button button--cart">
             <span>10 $</span>
             <div className="button__delimiter"></div>
             <svg

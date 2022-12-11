@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
+  const scroll = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="container container--cart">
       <div className="cart">
@@ -379,7 +382,10 @@ const Cart = () => {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <Link to="/" className="button button--outline button--add go-back-btn">
+            <Link
+              onClick={scroll}
+              to="/"
+              className="button button--outline button--add go-back-btn">
               <svg
                 width="8"
                 height="14"

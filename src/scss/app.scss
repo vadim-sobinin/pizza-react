@@ -104,7 +104,7 @@ body {
 
   &--cart {
     max-width: 820px;
-    margin: 90px auto;
+    margin: 30px auto;
     .content__title {
       margin: 0;
     }
@@ -369,5 +369,9 @@ body {
       font-weight: 600;
       font-size: 18px;
     }
+  }
+
+  .content__items {
+    display: block;
   }
 }

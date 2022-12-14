@@ -4,26 +4,30 @@ import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import Pagination from '../components/Pagination';
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState(0);
   const [sortType, setSortType] = React.useState({ name: 'popularity', sortProp: 'rating' });
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
     setIsLoading(false);
+    const search = searchValue ? `&search=${searchValue}` : '';
+
     fetch(
-      `https://63b1fc0a5e490925c511e59c.mockapi.io/items?${
+      `https://63b1fc0a5e490925c511e59c.mockapi.io/items?limit=4&page=${currentPage}&${
         categoryId > 0 ? 'category=' + categoryId : ''
-      }&sortBy=${sortType.sortProp}&order=desc`,
+      }${search}&sortBy=${sortType.sortProp}&order=desc`,
     )
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
         setIsLoading(true);
       });
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
     <div className="container">
@@ -46,6 +50,7 @@ const Home = () => {
             ))
           : [...new Array(6)].map((_, index) => <Skeleton key={index} />)}
       </div>
+      <Pagination setCurrentPage={setCurrentPage} />
     </div>
   );
 };

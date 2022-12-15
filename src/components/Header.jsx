@@ -2,7 +2,7 @@ import logoSvg from '../assets/img/pizza-logo.svg';
 import { Link } from 'react-router-dom';
 import Search from './Search';
 
-function Header({ setSearchValue, searchValue }) {
+function Header() {
   const scroll = () => {
     window.scrollTo(0, 0);
   };
@@ -19,7 +19,7 @@ function Header({ setSearchValue, searchValue }) {
             </div>
           </div>
         </Link>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        <Search />
         <div onClick={window.scrollTo(0, 0)} className="header__cart">
           <Link onClick={scroll} to="/cart" className="button button--cart">
             <span>10 $</span>

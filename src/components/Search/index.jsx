@@ -2,8 +2,11 @@ import React from 'react';
 
 import styles from './Search.module.scss';
 import closeIcon from '../../assets/img/close.svg';
+import { SearchContext } from '../../App';
 
-const Search = ({ setSearchValue, searchValue }) => {
+const Search = () => {
+  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+
   return (
     <div className={styles.root}>
       <svg

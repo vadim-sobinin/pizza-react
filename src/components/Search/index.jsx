@@ -4,8 +4,34 @@ import styles from './Search.module.scss';
 import closeIcon from '../../assets/img/close.svg';
 import { SearchContext } from '../../App';
 
+import { debounce } from 'lodash';
+
 const Search = () => {
+  const [value, setValue] = React.useState('');
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const inputRef = React.useRef();
+
+  // const testDebounce = React.useCallback(debounce(() => {
+  //   console.log("HELLO")
+  // }, 1000), [])
+
+  const onClickClear = () => {
+    setSearchValue('');
+    setValue('');
+    inputRef.current.focus();
+  };
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
+  };
+
+  const updateSearchValue = React.useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 500),
+    [],
+  );
 
   return (
     <div className={styles.root}>
@@ -22,19 +48,15 @@ const Search = () => {
         />
       </svg>
       <input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        ref={inputRef}
+        value={value}
+        onChange={(e) => onChangeInput(e)}
         className={styles.input}
         type="text"
         placeholder="Pizza search..."
       />
       {searchValue && (
-        <img
-          onClick={() => setSearchValue('')}
-          className={styles.clearIcon}
-          src={closeIcon}
-          alt="clear"
-        />
+        <img onClick={onClickClear} className={styles.clearIcon} src={closeIcon} alt="clear" />
       )}
     </div>
   );

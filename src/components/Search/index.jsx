@@ -26,10 +26,11 @@ const Search = () => {
     updateSearchValue(event.target.value);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
     debounce((str) => {
       setSearchValue(str);
-    }, 500),
+    }, 300),
     [],
   );
 

@@ -35,7 +35,6 @@ const Home = () => {
   const fetchPizzas = () => {
     setIsLoading(false);
     const search = searchValue ? `&search=${searchValue}` : '';
-    console.log(sortType);
     axios
       .get(
         `https://63b1fc0a5e490925c511e59c.mockapi.io/items?limit=4&page=${currentPage}&${
@@ -95,6 +94,7 @@ const Home = () => {
           ? items.map((obj) => (
               <PizzaBlock
                 key={obj.id}
+                id={obj.id}
                 title={obj.title}
                 price={obj.price}
                 imageUrl={obj.imageUrl}

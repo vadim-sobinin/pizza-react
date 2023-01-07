@@ -25,7 +25,7 @@ function Header() {
           </div>
         </Link>
         <Search />
-        <div onClick={window.scrollTo(0, 0)} className="header__cart">
+        <div onClick={scroll} className="header__cart">
           <Link onClick={scroll} to="/cart" className="button button--cart">
             <span>{totalPrice} $</span>
             <div className="button__delimiter"></div>

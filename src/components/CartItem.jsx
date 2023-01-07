@@ -13,7 +13,7 @@ function CartItem({ id, title, type, price, count, imageUrl }) {
     );
   };
   const onClickMinus = () => {
-    dispatch(minusItem(id));
+    count !== 1 ? dispatch(minusItem(id)) : onClickRemove();
   };
   const onClickRemove = () => {
     dispatch(removeItem(id));

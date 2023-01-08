@@ -2,34 +2,31 @@ import React from 'react';
 
 import styles from './Search.module.scss';
 import closeIcon from '../../assets/img/close.svg';
-import { SearchContext } from '../../App';
 
 import { debounce } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchValue, setSearchInputValue } from '../../redux/slices/filterSlice';
 
 const Search = () => {
-  const [value, setValue] = React.useState('');
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const dispatch = useDispatch();
+  const { searchInputValue } = useSelector((state) => state.filterSlice);
   const inputRef = React.useRef();
 
-  // const testDebounce = React.useCallback(debounce(() => {
-  //   console.log("HELLO")
-  // }, 1000), [])
-
   const onClickClear = () => {
-    setSearchValue('');
-    setValue('');
+    dispatch(setSearchValue(''));
+    dispatch(setSearchInputValue(''));
     inputRef.current.focus();
   };
 
   const onChangeInput = (event) => {
-    setValue(event.target.value);
+    dispatch(setSearchInputValue(event.target.value));
     updateSearchValue(event.target.value);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 300),
     [],
   );
@@ -50,13 +47,13 @@ const Search = () => {
       </svg>
       <input
         ref={inputRef}
-        value={value}
+        value={searchInputValue}
         onChange={(e) => onChangeInput(e)}
         className={styles.input}
         type="text"
         placeholder="Pizza search..."
       />
-      {searchValue && (
+      {searchInputValue && (
         <img onClick={onClickClear} className={styles.clearIcon} src={closeIcon} alt="clear" />
       )}
     </div>

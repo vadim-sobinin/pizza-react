@@ -392,3 +392,25 @@ body {
     display: block;
   }
 }
+
+.pizza-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 70%;
+  }
+  h2 {
+    font-size: 38px;
+  }
+  h4 {
+    font-size: 30px;
+    padding: 20px;
+  }
+  button span {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}

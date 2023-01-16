@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +9,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import { Sort, sortCategoryList } from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import { fetchPizzas } from '../redux/slices/pizzaSlice';
 
 const Home = () => {

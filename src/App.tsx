@@ -1,11 +1,9 @@
-import React from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
-import Header from './components/Header';
+import { Routes, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import './scss/app.scss';
-import FullPizza from './pages/FullPizza';
+import FullPizza from "./pages/FullPizza"
 import MainLayout from './layouts/MainLayout';
 
 function App() {

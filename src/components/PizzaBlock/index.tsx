@@ -3,9 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addItem } from '../../redux/slices/cartSlice';
 
-function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
+type PizzaBlockProps = {
+  id: string; 
+  title: string; 
+  price: number; 
+  imageUrl: string; 
+  sizes: number[]; 
+  types: number[];
+}
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => state.cartSlice.items.find((obj) => obj.id === id));
+  const cartItem = useSelector((state: any) => state.cartSlice.items.find((obj: any) => obj.id === id));
   const typeNames = ['thin', 'traditional'];
   const addedCount = cartItem ? cartItem.count : 0;
   const [activeType, setActiveType] = React.useState(0);

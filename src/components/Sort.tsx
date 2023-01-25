@@ -26,8 +26,8 @@ export function Sort() {
   }
 
   React.useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (!e.target.closest('.sort')) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.sort')) {
         setOpen(false);
       }
     };

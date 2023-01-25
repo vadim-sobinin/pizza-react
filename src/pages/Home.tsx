@@ -1,30 +1,38 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import {
+  FilterSliceState,
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from '../redux/slices/filterSlice';
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import { Sort, sortCategoryList } from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-  const { categoryId, sort, currentPage, searchValue } = useSelector((state) => state.filterSlice);
-  const { items, status } = useSelector((state) => state.pizzaSlice);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(
+    (state: any) => state.filterSlice,
+  );
+  const { items, status } = useSelector((state: any) => state.pizzaSlice);
   const sortType = sort.sortProperty;
 
-  const onChangePage = (page) => {
+  const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
 
-  const onClickCategory = (id) => {
+  const onClickCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
@@ -42,16 +50,15 @@ const Home = () => {
 
   React.useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+      const params = qs.parse(window.location.search.substring(1)) as unknown as FilterSliceState;
 
       const sort = sortCategoryList.find((obj) => obj.sortProperty === params.sortProperty);
 
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        }),
-      );
+      if (sort) {
+        params.sort = sort;
+      }
+
+      dispatch(setFilters(params));
       isSearch.current = true;
     }
   }, []);
@@ -92,7 +99,7 @@ const Home = () => {
       ) : (
         <div className="content__items">
           {status === 'success'
-            ? items.map((obj) => (
+            ? items.map((obj: any) => (
                 <PizzaBlock
                   key={obj.id}
                   id={obj.id}

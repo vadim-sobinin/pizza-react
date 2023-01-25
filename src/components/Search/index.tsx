@@ -17,17 +17,16 @@ const Search: React.FC = () => {
     dispatch(setSearchInputValue(''));
 
     inputRef.current?.focus();
-    
   };
 
-  const onChangeInput = (event: any) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchInputValue(event.target.value));
     updateSearchValue(event.target.value);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
-    debounce((str) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
     }, 300),
     [],
